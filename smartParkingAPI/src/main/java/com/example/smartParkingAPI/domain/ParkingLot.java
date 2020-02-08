@@ -52,4 +52,7 @@ public class ParkingLot implements Identifiable{
 		// TODO Auto-generated method stub
 		this.id = id;
 	}
+//	public void updateStatus (String vehicle_no) {
+//		this.setVehicle_no(vehicle_no);
+//	} incase of any further updation required
 }
