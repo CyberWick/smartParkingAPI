@@ -1,12 +1,18 @@
 package com.example.smartParkingAPI.domain;
 
-public class Vehicles implements VIdentifiable{
+public class Vehicles implements Identifiable{
 	private String vehicle_no;
 	private String lot_name;
 	private String mallId;
+	//private String id;
 	private int duration;
-	Vehicles() {
-		
+	
+	public String getVehicle_no() {
+		return vehicle_no;
+	}
+	//@Override
+	public void setVehicle_no(String vehicle_no) {
+		this.vehicle_no = vehicle_no;
 	}
 	public String getLot_name() {
 		return lot_name;
@@ -31,18 +37,17 @@ public class Vehicles implements VIdentifiable{
 	public void setDuration(int duration) {
 		this.duration = duration;
 	}
-
 	@Override
 	public String getId() {
 		// TODO Auto-generated method stub
 		return vehicle_no;
 	}
-
-	@Override
-	public void setId(String vechile_no) {
-		// TODO Auto-generated method stub
-		this.vehicle_no = vehicle_no;
-	}
+//	@Override
+//	public void setId(String id) {
+//		// TODO Auto-generated method stub
+//		this.vehicle_no = id;
+//	}
+	
 
 
 }

@@ -42,17 +42,22 @@ public class ParkingLot implements Identifiable{
 	public void setDuration(int duration) {
 		this.duration = duration;
 	}
-	@Override
-	public Long getId() {
-		// TODO Auto-generated method stub
-		return id;
-	}
-	@Override
-	public void setId(Long id) {
-		// TODO Auto-generated method stub
-		this.id = id;
-	}
+//	@Override
+//	public Long getId() {
+//		// TODO Auto-generated method stub
+//		return id;
+//	}
+//	@Override
+//	public void setId(Long id) {
+//		// TODO Auto-generated method stub
+//		this.id = id;
+//	}
 //	public void updateStatus (String vehicle_no) {
 //		this.setVehicle_no(vehicle_no);
 //	} incase of any further updation required
+	@Override
+	public String getId() {
+		// TODO Auto-generated method stub
+		return lot_name;
+	}
 }
