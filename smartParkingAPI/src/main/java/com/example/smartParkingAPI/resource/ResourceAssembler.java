@@ -1,16 +1,3 @@
-<<<<<<< HEAD
-package com.example.smartParkingAPI.resource;
-
-import java.util.Collection;
-import java.util.stream.Collectors;
-
-public abstract class ResourceAssembler<DomainType, ResourceType> {
-    public abstract ResourceType toResource(DomainType domainObject);
-    public Collection<ResourceType> toResourceCollection(Collection<DomainType> domainObjects) {
-        return domainObjects.stream().map(o -> toResource(o)).collect(Collectors.toList());
-    }
-}
-=======
 package com.example.smartParkingAPI.resource;
 
 import java.util.Collection;
@@ -24,4 +11,3 @@ public abstract class ResourceAssembler<DomainType, ResourceType> {
 		return domainObjects.stream().map(o -> toResource(o)).collect(Collectors.toList());
 	}
 }
->>>>>>> branch 'master' of https://github.com/CyberWick/smartParkingAPI.git

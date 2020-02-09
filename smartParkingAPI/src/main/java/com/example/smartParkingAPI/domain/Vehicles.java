@@ -42,12 +42,10 @@ public class Vehicles implements Identifiable{
 		// TODO Auto-generated method stub
 		return vehicle_no;
 	}
-//	@Override
-//	public void setId(String id) {
-//		// TODO Auto-generated method stub
-//		this.vehicle_no = id;
-//	}
-	
-
+	@Override
+	public void setId(String id) {
+		// TODO Auto-generated method stub
+		this.vehicle_no = id;
+	}
 
 }

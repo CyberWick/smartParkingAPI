@@ -3,29 +3,16 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-<<<<<<< HEAD
-	
-	<groupId>com.example</groupId>
-	<artifactId>smartParkingAPI</artifactId>
-	<version>0.0.1-SNAPSHOT</version>	
-	<name>smartParkingAPI</name>
-	<description>Demo project for Spring Boot</description>
-	
-=======
->>>>>>> branch 'master' of https://github.com/CyberWick/smartParkingAPI.git
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>1.4.7.RELEASE</version>
 	</parent>
-<<<<<<< HEAD
-=======
 	<groupId>com.example</groupId>
 	<artifactId>smartParkingAPI</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>smartParkingAPI</name>
 	<description>Demo project for Spring Boot</description>
->>>>>>> branch 'master' of https://github.com/CyberWick/smartParkingAPI.git
 
 	<dependencies>
 		<dependency>
