@@ -4,23 +4,17 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
-import org.springframework.beans.factory.annotation.Autowired;
-
 
 public abstract class InMemoryRepository<T extends com.example.smartParkingAPI.domain.Identifiable> {
-
-	@Autowired
-	private LotIdGenerator idGenerator;
 	
-	private List<T> elements = Collections.synchronizedList(new ArrayList<>());
+	protected List<T> elements = Collections.synchronizedList(new ArrayList<>());
 
 	public T create(T element) {
 		elements.add(element);
-		element.setId(idGenerator.getNextId());
 		return element;
 	}
 
-	public boolean delete(Long id) {
+	public boolean delete(String id) {
 		return elements.removeIf(element -> element.getId().equals(id));
 	}
 
@@ -28,8 +22,8 @@ public abstract class InMemoryRepository<T extends com.example.smartParkingAPI.d
 		return elements;
 	}
 
-	public Optional<T> findById(Long id) {
-		return elements.stream().filter(e -> e.getId().equals(id)).findFirst();
+	public Optional<T> findById(String lot_no) {
+		return elements.stream().filter(e -> e.getId().equals(lot_no)).findFirst();
 	}
 
 	public int getCount() {
@@ -40,7 +34,7 @@ public abstract class InMemoryRepository<T extends com.example.smartParkingAPI.d
 		elements.clear();
 	}
 
-	public boolean update(Long id, T updated) {
+	public boolean update(String id, T updated) {
 		
 		if (updated == null) {
 			return false;
@@ -53,5 +47,4 @@ public abstract class InMemoryRepository<T extends com.example.smartParkingAPI.d
 	}
 	
 	protected abstract void updateIfExists(T original, T desired);
-
 }

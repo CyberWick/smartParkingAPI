@@ -7,10 +7,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class LotResource extends ResourceSupport{
 	
 	private final boolean status;
-	private final long id;
+	private final String id;
 	private final String vehicle_no;
 	private final String floor_no;
-	private final String lot_name;
 	private final int duration;
 	
 	public LotResource( ParkingLot lot) {
@@ -20,13 +19,12 @@ public class LotResource extends ResourceSupport{
 		this.id = lot.getId();
 		this.vehicle_no = lot.getVehicle_no();
 		this.floor_no = lot.getFloor_no();
-		this.lot_name = lot.getLot_name();
 		this.duration = lot.getDuration();
 		
 	}
 	
 	@JsonProperty("id")
-	public long getResourceId() {
+	public String getResourceId() {
 		return id;
 	}
 	
@@ -38,9 +36,6 @@ public class LotResource extends ResourceSupport{
 	}
 	public String getFloor_no() {
 		return floor_no;
-	}
-	public String getLot_name() {
-		return lot_name;
 	}
 	public int getDuration() {
 		return duration;
