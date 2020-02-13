@@ -2,6 +2,8 @@ package com.example.smartParkingAPI.domain;
 
 //import com.dzone.albanoj2.example.rest.domain.Identifiable;
 
+
+//CREATE TABLE ParkingLot(id varchar(6) Primary key, floor_no varchar(6), status boolean, vehiicle_no varchar(10), duration integer);
 public class ParkingLot implements Identifiable{
 	private boolean status;
 	private String id;

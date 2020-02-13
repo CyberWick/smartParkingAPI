@@ -67,13 +67,6 @@ public class LotController {
 		}
 	}
 	
-	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<Void> deleteLot(@PathVariable String id) {
-		boolean wasDeleted = repository.delete(id);
-		HttpStatus responseStatus = wasDeleted ? HttpStatus.NO_CONTENT : HttpStatus.NOT_FOUND;
-		return new ResponseEntity<>(responseStatus);
-	}
-	
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = "application/json")
 	public ResponseEntity<LotResource> updateLot(@PathVariable String id, @RequestBody ParkingLot updatedLot) {
 		boolean wasUpdated = repository.update(id, updatedLot);
@@ -86,4 +79,3 @@ public class LotController {
 		}
 	}
 }
-

@@ -33,63 +33,42 @@ public class RESTcontroller {
 	private VehicleResourceAssembler assembler;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<Collection<VehicleResource>> findAllOrders() {
-		List<Vehicles> orders = repository.findAll();
-		return new ResponseEntity<>(assembler.toResourceCollection(orders), HttpStatus.OK);
+	public ResponseEntity<Collection<VehicleResource>> findAllVehicles() {
+		List<Vehicles> vehicles = repository.findAll();
+		return new ResponseEntity<>(assembler.toResourceCollection(vehicles), HttpStatus.OK);
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, consumes = "application/json")
-	public ResponseEntity<VehicleResource> createOrder(@RequestBody Vehicles order) {
-		Vehicles createdOrder = repository.create(order);
-		return new ResponseEntity<>(assembler.toResource(createdOrder), HttpStatus.CREATED);
+	public ResponseEntity<VehicleResource> createVehicle(@RequestBody Vehicles vehicle) {
+		Vehicles createdVehicle = repository.create(vehicle);
+		return new ResponseEntity<>(assembler.toResource(createdVehicle), HttpStatus.CREATED);
 	}
 	
-//	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-//	public ResponseEntity<VehicleResource> findOrderById(@PathVariable String id) {
-//		Optional<Vehicles> order = repository.findById(id);
-//
-//		if (order.isPresent()) {
-//			return new ResponseEntity<>(assembler.toResource(order.get()), HttpStatus.OK);
-//		}
-//		else {
-//			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//		}
-//	}
-	
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-	public ResponseEntity<Void> deleteOrder(@PathVariable String id) {
+	public ResponseEntity<Void> deleteVehicle(@PathVariable String id) {
 		boolean wasDeleted = repository.delete(id);
 		HttpStatus responseStatus = wasDeleted ? HttpStatus.NO_CONTENT : HttpStatus.NOT_FOUND;
 		return new ResponseEntity<>(responseStatus);
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = "application/json")
-	public ResponseEntity<VehicleResource> updateOrder(@PathVariable String id, @RequestBody Vehicles updatedOrder) {
-		boolean wasUpdated = repository.update(id, updatedOrder);	
+	public ResponseEntity<VehicleResource> updateVehicle(@PathVariable String id, @RequestBody Vehicles updatedVehicle) {
+		boolean wasUpdated = repository.update(id, updatedVehicle);	
 		if (wasUpdated) {
-			return findOrderById(id);
+			return findVehicleById(id);
 		}
 		else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
 	@RequestMapping(value = "/find", method = RequestMethod.GET)
-	public ResponseEntity<VehicleResource> findOrderById(@RequestParam(name="vc_no", required=true, defaultValue="") String vehicle_no) {
-		Optional<Vehicles> order = repository.findById(vehicle_no);
-		if (order.isPresent()) {
-			return new ResponseEntity<>(assembler.toResource(order.get()), HttpStatus.OK);
+	public ResponseEntity<VehicleResource> findVehicleById(@RequestParam(name="vc_no", required=true, defaultValue="") String vehicle_no) {
+		Optional<Vehicles> vehicle = repository.findById(vehicle_no);
+		if (vehicle.isPresent()) {
+			return new ResponseEntity<>(assembler.toResource(vehicle.get()), HttpStatus.OK);
 		}
 		else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
 	}
-//	@RequestMapping(value = "/lot", method = RequestMethod.GET)
-//	public ResponseEntity<String> findMyLot_no(@RequestParam(name="vc_no", required=true, defaultValue="") String vehicle_no) {
-//		Optional<Vehicles> order = repository.findById(vehicle_no);
-//		if (order.isPresent()) {
-//			return new ResponseEntity<>(assembler.toResource(order.get()).getLot_name(), HttpStatus.OK);
-//		}else {
-//			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-//		}
-//	}
 }
