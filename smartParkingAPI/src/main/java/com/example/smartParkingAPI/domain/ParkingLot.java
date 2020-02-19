@@ -10,7 +10,7 @@ public class ParkingLot implements Identifiable{
 	private String vehicle_no;
 	private String floor_no;
 	private int duration;
-	ParkingLot() {
+	public ParkingLot() {
 		
 	}
 	public boolean isStatus() {

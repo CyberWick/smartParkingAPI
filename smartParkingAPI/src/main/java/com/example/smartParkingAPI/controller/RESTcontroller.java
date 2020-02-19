@@ -63,9 +63,9 @@ public class RESTcontroller {
 	}
 	@RequestMapping(value = "/find", method = RequestMethod.GET)
 	public ResponseEntity<VehicleResource> findVehicleById(@RequestParam(name="vc_no", required=true, defaultValue="") String vehicle_no) {
-		Optional<Vehicles> vehicle = repository.findById(vehicle_no);
-		if (vehicle.isPresent()) {
-			return new ResponseEntity<>(assembler.toResource(vehicle.get()), HttpStatus.OK);
+		Vehicles vehicle = repository.findById(vehicle_no);
+		if (vehicle!=null) {
+			return new ResponseEntity<>(assembler.toResource(vehicle), HttpStatus.OK);
 		}
 		else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);

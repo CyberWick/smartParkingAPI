@@ -42,8 +42,9 @@ public class LotController {
 	@RequestMapping(value = "/nextFree" ,method = RequestMethod.GET)
 	public ResponseEntity<LotResource> findNextFree() {
 		ParkingLot lot = repository.findNext();
-		if(lot != null)
+		if(lot != null) {
 			return new ResponseEntity<>(assembler.toResource(lot), HttpStatus.OK);
+		}
 		else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}
@@ -57,10 +58,10 @@ public class LotController {
 	
 	@RequestMapping(value = "/find", method = RequestMethod.GET)
 	public ResponseEntity<LotResource> findLotById(@RequestParam(name = "lot_no", required = true,defaultValue = "") String id) {
-		Optional<ParkingLot> lot = repository.findById(id);
+		ParkingLot lot = repository.findById(id);
 
-		if (lot.isPresent()) {
-			return new ResponseEntity<>(assembler.toResource(lot.get()), HttpStatus.OK);
+		if(lot != null) {
+			return new ResponseEntity<>(assembler.toResource(lot), HttpStatus.OK);
 		}
 		else {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
