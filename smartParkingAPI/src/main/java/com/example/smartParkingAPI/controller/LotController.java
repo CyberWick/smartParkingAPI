@@ -34,7 +34,7 @@ public class LotController {
 	private LotResourceAssembler assembler;
 
 	@RequestMapping(method = RequestMethod.GET)
-	public ResponseEntity<Collection<LotResource>> findAllLots() {
+	public ResponseEntity<Collection<LotResource>> findAlEmptylLots() {
 		List<ParkingLot> lots = repository.findEmpty();
 		return new ResponseEntity<>(assembler.toResourceCollection(lots), HttpStatus.OK);
 	}

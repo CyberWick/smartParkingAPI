@@ -13,17 +13,7 @@ import com.example.smartParkingAPI.domain.ParkingLot;
 
 @Repository
 public class LotRepository {
-	protected List<ParkingLot> elements = Collections.synchronizedList(new ArrayList<>());
-
-	protected void updateIfExists(ParkingLot original, ParkingLot updated) {
-		original.setDuration(updated.getDuration());
-		original.setFloor_no(updated.getFloor_no());
-		original.setStatus(updated.isStatus());
-		original.setVehicle_no(updated.getVehicle_no());
-		
-	}
-	
-	
+	protected List<ParkingLot> elements = Collections.synchronizedList(new ArrayList<>());	
 	public ParkingLot create(ParkingLot element) {
 		try {
 			Statement statement = PostgresConnection.connection.createStatement();
@@ -62,8 +52,8 @@ public class LotRepository {
 		try {
 			Statement statement = PostgresConnection.connection.createStatement();
 			ResultSet rs = statement.executeQuery("Select * from parkinglot where status = false LIMIT 1;");
-            rs.next();
-            if(rs!=null) {
+            
+            if(rs.next()!=false) {
             	ParkingLot p = new ParkingLot();
             	p.setId(rs.getString("id"));
             	p.setFloor_no(rs.getString("floor_no"));
@@ -85,7 +75,18 @@ public class LotRepository {
 
 	public boolean update(String id, ParkingLot updatedLot) {
 		// TODO Auto-generated method stub
-		
+		try {
+			Statement statement = PostgresConnection.connection.createStatement();
+			ResultSet rs = statement.executeQuery("Select * from parkinglot where id = '" + id + "';");
+			if(rs.next()!=false){
+				statement.executeUpdate("Update parkinglot set status = "+ updatedLot.isStatus() + ", vehicle_no = '" + updatedLot.getVehicle_no()+ "', duration = "+ updatedLot.getDuration()+ " where id = '" + id + "';");
+            	return true;
+            }
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return false;
 	}
 
@@ -94,8 +95,7 @@ public class LotRepository {
 		try {
 			Statement statement = PostgresConnection.connection.createStatement();
 			ResultSet rs = statement.executeQuery("Select * from parkinglot where id = '"+ id +"';");
-            rs.next();
-            if(rs!=null) {
+            if(rs.next()!=false) {
             	ParkingLot p = new ParkingLot();
             	p.setId(rs.getString("id"));
             	p.setFloor_no(rs.getString("floor_no"));

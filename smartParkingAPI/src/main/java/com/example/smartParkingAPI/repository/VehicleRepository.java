@@ -6,7 +6,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
@@ -18,14 +17,6 @@ public class VehicleRepository {
 	
 	protected List<Vehicles> elements = Collections.synchronizedList(new ArrayList<>());
 
-	protected void updateIfExists(Vehicles original, Vehicles updated) {
-		original.setDuration(updated.getDuration());
-		//original.setId(updated.getId());
-		original.setLot_name(updated.getLot_name());
-		original.setMallId(updated.getMallId());
-		original.setVehicle_no(updated.getVehicle_no());
-	}
-	
 	public List<Vehicles> findAll() {
 		List<Vehicles> vehicles = Collections.synchronizedList(new ArrayList<>());
 		try {
@@ -77,8 +68,7 @@ public class VehicleRepository {
 		try {
 			Statement statement = PostgresConnection.connection.createStatement();
 			ResultSet rs = statement.executeQuery("Select * from vehicles where vehicle_no = '"+ id+"';");
-			rs.next();
-			if(rs != null){
+			if(rs.next()!=false){
             	Vehicles v = new Vehicles();
             	v.setId(rs.getString("vehicle_no"));
             	v.setLot_name(rs.getString("lot_name"));
@@ -94,17 +84,20 @@ public class VehicleRepository {
 		return null;
 	}
 	
-public boolean update(String id, Vehicles updated) {
-		
-		if (updated == null) {
-			return false;
+	public boolean update(String id, Vehicles updated) {
+		try {
+			Statement statement = PostgresConnection.connection.createStatement();
+			ResultSet rs = statement.executeQuery("Select * from vehicles where vehicle_no = '" + id + "';");
+			if(rs.next()!=false){
+				statement.executeUpdate("Update vehicles set lot_name = '"+ updated.getLot_name()+ "' , mallid = '" +updated.getMallId()+ "', duration = "+ updated.getDuration()+ " where vehicle_no = '" + id + "';");
+	        	return true;
+	        }
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		else {
-//			Optional<Vehicles> element = findById(id);
-//			element.ifPresent(original -> updateIfExists(original, updated));
-//			return element.isPresent();
-			return true;
-		}
+		return false;
 	}
 }
 
